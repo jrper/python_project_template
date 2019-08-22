@@ -36,6 +36,14 @@ steps:
   displayName: 'Install dependencies'
 
 - script: |
+    python setup.py build_ext --inplace
+  displayName: 'Build extensions'
+
+- script: |
+    pip install -e .
+  displayName: 'Install package'
+
+- script: |
     pip install pytest pytest-cov pytest-azurepipelines
     python -m pytest --doctest-modules example --cov=example --cov-report=xml
   displayName: 'pytest'
@@ -44,7 +52,7 @@ steps:
   condition: succeededOrFailed()
   inputs:
     testResultsFiles: 'test-output.xml'
-    testRunTitle: 'Publish test results for Python $(python.version)'
+    testRunTitle: 'Publish test results for Python $(pythonVersion)'
 
 - task: PublishCodeCoverageResults@1
   inputs:
