@@ -32,9 +32,21 @@ steps:
 
 - script: |
     python -m pip install --upgrade pip
+    pip install -r requirements.txt
   displayName: 'Install dependencies'
 
 - script: |
-    pip install pytest pytest-azurepipelines
-    pytest --doctest-modules
+    pip install pytest pytest-cov pytest-azurepipelines
+    python -m pytest --doctest-modules example --cov=example --cov-report=xml
   displayName: 'pytest'
+
+- task: PublishTestResults@2
+  condition: succeededOrFailed()
+  inputs:
+    testResultsFiles: 'test-output.xml'
+    testRunTitle: 'Publish test results for Python $(python.version)'
+
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: 'coverage.xml'
