@@ -8,8 +8,8 @@ def test_Example():
 
     ex = example.Example("Test")
 
-    assert(ex.name=="Test") 
+    assert ex.name=="Test" 
 
     ex.name = "Test2"
 
-    assert(ex.name=="Test2")
+    assert ex.name=="Test2"
