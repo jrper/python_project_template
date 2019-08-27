@@ -1,6 +1,8 @@
 #define PY_SSIZE_T_CLEAN
 #include <Python.h>
 
+#include "example.h"
+
 static PyObject *
 long_add(PyObject *self, PyObject *args)
 {
@@ -34,6 +36,11 @@ PyInit__example(void)
     m = PyModule_Create(&examplemodule);
     if (m == NULL)
         return NULL;
+
+    if (PyType_Ready(exampleExample_Type()) < 0)  return NULL;
+
+    Py_INCREF(exampleExample_Type());
+    PyModule_AddObject(m,"Example", (PyObject*)exampleExample_Type());
 
     return m;
 }

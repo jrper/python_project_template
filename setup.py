@@ -2,7 +2,9 @@
 
 from distutils.core import setup, Extension
 
-mod1 = Extension('example._example', sources=["src/example.c"], )
+mod1 = Extension('example._example',
+      include_dirs=["source"], 
+      sources=["src/example.c", "src/example_object.c"], )
 
 setup(name='Example',
       version='1.0',
