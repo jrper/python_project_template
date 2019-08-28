@@ -9,8 +9,8 @@ typedef struct {
     char data_name[255];
 } exampleExample;
 
-PyObject* exampleExample_NEW();
+PyObject* exampleExample_NEW(void);
 int exampleExample_Check(PyObject*);
-PyTypeObject* exampleExample_Type();
+PyTypeObject* exampleExample_Type(void);
 
 #endif /* _PICKEROBJECT_H */

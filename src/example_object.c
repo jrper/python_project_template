@@ -41,6 +41,8 @@ static int exampleExample_init(PyObject *pyself, PyObject *args, PyObject *kw)
         PyObject* name;
         PyArg_ParseTuple(args, "O", &name);
         set_name(pyself, name, NULL);
+    } else {
+        strcpy(self->data_name, "stranger");
     }
     return 0;
 }
@@ -63,7 +65,11 @@ PyObject* exampleExampleHello(PyObject *pyself, PyObject *args, PyObject *kw)
 
 static void exampleExample_dealloc(PyObject *self)
 {
-    exampleExample *p = (exampleExample *)self;
+    /*
+        code to deallocate memory, e.g.
+        exampleExample *p = (exampleExample *)self;
+        free(p->data)
+    */
     Py_TYPE(self)->tp_free(self);
 }
 
@@ -132,7 +138,7 @@ static PyTypeObject exampleExampleType = {
     0 /* tp_is_gc For PyObject_IS_GC */
 };
 
-PyObject* exampleExample_NEW(){
+PyObject* exampleExample_NEW(void){
     exampleExample* object = PyObject_NEW(exampleExample, &exampleExampleType);
     return (PyObject*) object;
 }
@@ -142,6 +148,6 @@ int exampleExample_Check(PyObject* ob)
     return PyObject_IsInstance(ob, (PyObject*) &exampleExampleType);
 }
   
-PyTypeObject* exampleExample_Type() {
+PyTypeObject* exampleExample_Type(void) {
     return &exampleExampleType;
 }

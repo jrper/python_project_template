@@ -2,8 +2,10 @@
 
 from distutils.core import setup, Extension
 
+from numpy import get_include
+
 mod1 = Extension('example._example',
-      include_dirs=["source"], 
+      include_dirs=["source", get_include()], 
       sources=["src/example.c", "src/example_object.c"], )
 
 setup(name='Example',
