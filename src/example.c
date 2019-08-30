@@ -15,7 +15,7 @@ long_add(PyObject *self, PyObject *args)
 
 static PyMethodDef exampleMethods[] = {
     {"long_add",  long_add, METH_VARARGS,
-     "Execute a shell command."},
+     "long_add(a, b)\n--\n\n Add two long integers."},
     {NULL, NULL, 0, NULL}        /* Sentinel */
 };
 
