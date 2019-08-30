@@ -48,6 +48,11 @@ steps:
     python -m pytest --doctest-modules example --cov=example --cov-report=xml
   displayName: 'pytest'
 
+- script: |
+    pip install sphinx
+    python -m sphinx docs docs/html
+  displayName: 'Build Documentation'
+
 - task: PublishTestResults@2
   condition: succeededOrFailed()
   inputs:

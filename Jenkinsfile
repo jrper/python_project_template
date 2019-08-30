@@ -18,6 +18,13 @@ node {
     python -m pytest --doctest-modules example --cov=example --cov-report=xml
     ''' 
    }
+   stage('Build Documentation') {
+   sh '''
+    . venv/bin/activate
+    pip install sphinx
+    python -m sphinx docs docs/html
+    ''' 
+   }
    stage('Results') {
       junit '**/*.xml'
       archive 'target/*.jar'

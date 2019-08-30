@@ -9,3 +9,5 @@ install:
 script: 
   - pip install pytest pytest-cov pytest-azurepipelines
   - python -m pytest --doctest-modules example --cov=example --cov-report=xml
+  - pip install sphinx
+  - python -m sphinx docs docs/html
